@@ -5,7 +5,6 @@ using System.Text.Json;
 
 public class Block
 {
-        public int BlockID { get; set; }
         public int Index { get; set; }
         public DateTime TimeStamp { get; set; }
         public string PreviousHash { get; set; }

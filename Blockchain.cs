@@ -6,7 +6,6 @@ public class Blockchain
 {
     public string BlockchainName { get; set; }
     public IList<Block> Chain { set; get; }
-    public List<Block> Blocks { get; set; }
 
     public Blockchain(string blockchainName)
     {
