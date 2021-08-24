@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using witskyNet;
 
 public class Server
@@ -14,12 +15,13 @@ public class Server
     public Server(int localPort)
     {
         LocalPort = localPort;
-        ReceiveMessage( LocalPort);
+        Thread receiveThread = new Thread(new ThreadStart(ReceiveMessage));
+        receiveThread.Start();
     }
 
-    public void ReceiveMessage(int localPort)
+    public void ReceiveMessage()
     {
-        UdpClient server = new UdpClient(localPort); // UdpClient для получения данных
+        UdpClient server = new UdpClient(LocalPort); // UdpClient для получения данных
         try
         {
             while(true)
