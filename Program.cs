@@ -45,6 +45,7 @@ namespace witskyNet
             System.Console.WriteLine("3: Создать цепочку");
             System.Console.WriteLine("4: Добавить блок в цепочку");
             System.Console.WriteLine("5: Просмотреть цепочку");
+            System.Console.WriteLine("6: Список цепочек");
             
             bool done = false;
 
@@ -99,30 +100,35 @@ namespace witskyNet
                             chainName = Console.ReadLine();
                             Console.WriteLine("Введите данные для блока:");  
                             string blockData = Console.ReadLine();
-                            
-                            Blockchain selectedBlockchain = (Blockchain)blockchains.Where(b => b.BlockchainName == chainName);
 
-                            Block lastBlock = selectedBlockchain.GetLatestBlock();
-
-                            selectedBlockchain.AddBlock(new Block(lastBlock.Hash, blockData));
-
-                            
-
+                            blockchains.Where(b => b.BlockchainName == chainName).ToList().ForEach(b => b.AddBlock(new Block(b.GetLatestBlock().Hash, blockData)));
+                                        
                             jsonString = JsonSerializer.Serialize(blockchains);
                             File.WriteAllText(filePath, jsonString);
                             Console.WriteLine(File.ReadAllText(filePath));     
                             break;
-                        // case 5:      
-                        //     System.Console.WriteLine(blockchains.BlockchainName);  
-                        //     foreach(var b in blockchains.Chain)
-                        //     {
-                        //         System.Console.WriteLine($"Index: {b.Index}");
-                        //         System.Console.WriteLine($"PreviousHash: {b.PreviousHash}");
-                        //         System.Console.WriteLine($"Hash: {b.Hash}");
-                        //         System.Console.WriteLine($"Data: {b.Data}");
-                        //         System.Console.WriteLine("-------------------");   
-                        //     }
-                        //     break;
+                        case 5:
+                            Console.WriteLine("Введите имя цепочки :");         
+                            chainName = Console.ReadLine();
+                            System.Console.WriteLine();
+                            
+                            Blockchain selectedBlockchain = blockchains.First(x => x.BlockchainName == chainName);
+
+                            foreach(Block b in selectedBlockchain.Chain)
+                            {
+                                System.Console.WriteLine($"Index: {b.Index}");
+                                System.Console.WriteLine($"PreviousHash: {b.PreviousHash}");
+                                System.Console.WriteLine($"Hash: {b.Hash}");
+                                System.Console.WriteLine($"Data: {b.Data}");
+                                System.Console.WriteLine("-------------------");   
+                            }
+                            break;
+                        case 6:
+                            Console.WriteLine("Список цепочек:");  
+                            foreach(Blockchain b in blockchains){
+                                System.Console.WriteLine(b.BlockchainName);
+                            } 
+                            break;
                         case 0:
                             done = true;
                             break;

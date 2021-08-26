@@ -1,27 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Git\\my-git\\witskyNet\\witskyNet.csproj": {}
+    "D:\\Git\\1. my-git\\witskyNet\\witskyNet.csproj": {}
   },
   "projects": {
-    "D:\\Git\\my-git\\witskyNet\\witskyNet.csproj": {
+    "D:\\Git\\1. my-git\\witskyNet\\witskyNet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Git\\my-git\\witskyNet\\witskyNet.csproj",
+        "projectUniqueName": "D:\\Git\\1. my-git\\witskyNet\\witskyNet.csproj",
         "projectName": "witskyNet",
-        "projectPath": "D:\\Git\\my-git\\witskyNet\\witskyNet.csproj",
-        "packagesPath": "C:\\Users\\w1tsky\\.nuget\\packages\\",
-        "outputPath": "D:\\Git\\my-git\\witskyNet\\obj\\",
+        "projectPath": "D:\\Git\\1. my-git\\witskyNet\\witskyNet.csproj",
+        "packagesPath": "C:\\Users\\d.marchuk\\.nuget\\packages\\",
+        "outputPath": "D:\\Git\\1. my-git\\witskyNet\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\w1tsky\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\d.marchuk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -53,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
