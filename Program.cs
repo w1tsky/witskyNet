@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -81,7 +82,8 @@ namespace witskyNet
                             remotePort = Int32.Parse(Console.ReadLine()); // порт, к которому мы подключаемся
                             Console.WriteLine("Введите сообщение:");
                             string message = Console.ReadLine();
-                            Client client = new Client(message, remoteAddress, remotePort);
+                            IPEndPoint serverEndpoint = new IPEndPoint(IPAddress.Parse(remoteAddress), 23444);
+                            Client client = new Client(serverEndpoint);
                             break;
                         case 3:
                             Console.WriteLine("Блокчейн:");
