@@ -23,7 +23,10 @@ namespace witskyNet
         static string filePath;
         static string jsonString;
         static void Main(string[] args)
-        {              
+        {          
+
+            IPEndPoint serverEndpoint = new IPEndPoint(IPAddress.Parse("18.184.11.10"), 23444);
+            Client client = new Client(serverEndpoint);
 
             fileName = "blockchains.json";
             filePath = Path.Combine(Environment.CurrentDirectory, @"Data\", fileName);
@@ -76,14 +79,14 @@ namespace witskyNet
                             break;
                         case 2:
                             Console.WriteLine("Клиент:");
-                            Console.WriteLine("Введите адрес для подключения:");
-                            remoteAddress = Console.ReadLine();
-                            Console.Write("Введите порт для подключения: ");
-                            remotePort = Int32.Parse(Console.ReadLine()); // порт, к которому мы подключаемся
-                            Console.WriteLine("Введите сообщение:");
-                            string message = Console.ReadLine();
-                            IPEndPoint serverEndpoint = new IPEndPoint(IPAddress.Parse(remoteAddress), 23444);
-                            Client client = new Client(serverEndpoint);
+                            // Console.WriteLine("Введите адрес для подключения:");
+                            // remoteAddress = Console.ReadLine();
+                            // Console.Write("Введите порт для подключения: ");
+                            // remotePort = Int32.Parse(Console.ReadLine()); // порт, к которому мы подключаемся
+                            // Console.WriteLine("Введите сообщение:");
+                            // string message = Console.ReadLine();
+                            //IPEndPoint serverEndpoint = new IPEndPoint(IPAddress.Parse("18.184.11.10"), 23444);
+                            //Client client = new Client(serverEndpoint);
                             break;
                         case 3:
                             Console.WriteLine("Блокчейн:");

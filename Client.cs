@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using witskyNet;
 
 public class Client
@@ -13,6 +14,7 @@ public class Client
     public int RemotePort { get; set; }
     public ClientInfo LocalClientInfo = new ClientInfo();
     public event EventHandler<string> OnResultsUpdate;
+
     public Client(IPEndPoint serverEndpoint)
     {
 
@@ -26,10 +28,10 @@ public class Client
             LocalClientInfo.InternalAddresses.Add(IP);
 
         // SendMessage(Message, RemoteAdress, RemotePort);
-        SendMessageUDP(LocalClientInfo.Simplified(), serverEndpoint);
+        SendMessageUDP(serverEndpoint);
     }
 
-    public void SendMessage(string message, string remoteAddress, int remotePort)
+    public void SendMessage(string message, IPEndPoint EP)
     {
         clientUdp = new UdpClient();
         try
@@ -37,7 +39,7 @@ public class Client
             while(true)
             {
                 byte[] data = Encoding.Unicode.GetBytes(message);
-                clientUdp.Send(data, data.Length, remoteAddress, remotePort); // отправка
+                clientUdp.Send(data, data.Length, EP); // отправка
             }
         }
         catch (Exception ex)
@@ -51,21 +53,22 @@ public class Client
     }
 
 
-        public void SendMessageUDP(IP2PBase Item, IPEndPoint EP)
+    public void SendMessageUDP(IPEndPoint EP)
+    {
+
+        clientUdp = new UdpClient();
+        
+        byte[] data = JsonSerializer.SerializeToUtf8Bytes(LocalClientInfo);
+
+        try
         {
-            Item.ID = LocalClientInfo.ID;
-
-            byte[] data = Item.ToByteArray();
-
-            try
-            {
-                if (data != null)
-                    clientUdp.Send(data, data.Length, EP);
-            }
-            catch (Exception e)
-            {
-                if (OnResultsUpdate != null)
-                    OnResultsUpdate.Invoke(this, "Error on UDP Send: " + e.Message);
-            }
+            if (data != null)
+                clientUdp.Send(data, data.Length, EP);
         }
+        catch (Exception e)
+        {
+            if (OnResultsUpdate != null)
+                OnResultsUpdate.Invoke(this, "Error on UDP Send: " + e.Message);
+        }
+    }
 }
